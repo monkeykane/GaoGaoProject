@@ -70,7 +70,8 @@ public class CameraController : MonoBehaviour
 
     protected void SetZoom(float current)
     {
-        //Vector3 dir = transform.forward;
-        transform.localPosition  = new Vector3(0,0,-1) * current;
+        Vector3 dir = transform.forward;
+        Vector3 localdir = transform.InverseTransformDirection(dir);
+        transform.localPosition  = -localdir * current;
     }
 }
