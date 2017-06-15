@@ -7,9 +7,10 @@ namespace GaoGao
     public class stCarItem : BaseData
     {
         public string   m_PrefabName;
+        public string   m_icon;
         public int[]    m_ColorSets;
         public int[]    m_WheelSets;
-        public int      m_inside;
+        public int[]    m_insideSets;
 
 
         public override void LoadData(int nRowIndex, TableFile fileData)
@@ -17,9 +18,10 @@ namespace GaoGao
             int readIndex = 0;
             m_nId = fileData.getInt(readIndex); readIndex++;
             m_PrefabName = fileData.getString(readIndex); readIndex++;
+            m_icon = fileData.getString(readIndex); readIndex++;
             string colorstring = fileData.getString(readIndex); readIndex++;
             string wheelstring = fileData.getString(readIndex); readIndex++;
-            m_inside = fileData.getInt(readIndex); readIndex++;
+            string insidestring = fileData.getString(readIndex); readIndex++;
 
             colorstring = colorstring.Replace(" ", "");
             colorstring = colorstring.Replace("\"", "");
@@ -39,13 +41,22 @@ namespace GaoGao
                 System.Int32.TryParse(wheelItems[i], out m_WheelSets[i]);
             }
 
+            insidestring = insidestring.Replace(" ", "");
+            insidestring = insidestring.Replace("\"", "");
+            string[] insideItems = insidestring.Split(',');
+            m_insideSets = new int[insideItems.Length];
+            for (int i = 0; i < insideItems.Length; ++i)
+            {
+                System.Int32.TryParse(insideItems[i], out m_insideSets[i]);
+            }
+
         }
     }
 
     public class stColorItem : BaseData
     {
         public string   m_texture;
-        public string m_icon;
+        public string   m_icon;
         public int      m_R;
         public int      m_G;
         public int      m_B;
@@ -75,5 +86,25 @@ namespace GaoGao
             m_icon = fileData.getString(readIndex); readIndex++;
         }
 
+    }
+
+    public class stInsideItem : BaseData
+    {
+        public string m_texture;
+        public string m_icon;
+        public int m_R;
+        public int m_G;
+        public int m_B;
+
+        public override void LoadData(int nRowIndex, TableFile fileData)
+        {
+            int readIndex = 0;
+            m_nId = fileData.getInt(readIndex); readIndex++;
+            m_texture = fileData.getString(readIndex); readIndex++;
+            m_icon = fileData.getString(readIndex); readIndex++;
+            m_R = fileData.getInt(readIndex); readIndex++;
+            m_G = fileData.getInt(readIndex); readIndex++;
+            m_B = fileData.getInt(readIndex); readIndex++;
+        }
     }
 }

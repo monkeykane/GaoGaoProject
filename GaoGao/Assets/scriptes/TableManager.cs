@@ -75,6 +75,7 @@ namespace GaoGao
             TableItemManager<stCarItem>.Instance().LoadFile("CarConfig", "Table/");
             TableItemManager<stColorItem>.Instance().LoadFile("Colors", "Table/");
             TableItemManager<stWheelItem>.Instance().LoadFile("Wheels", "Table/");
+            TableItemManager<stInsideItem>.Instance().LoadFile("Insides", "Table/");
 
         }
 
@@ -84,6 +85,7 @@ namespace GaoGao
             TableItemManager<stCarItem>.Instance().ClearUp();
             TableItemManager<stColorItem>.Instance().ClearUp();
             TableItemManager<stWheelItem>.Instance().ClearUp();
+            TableItemManager<stInsideItem>.Instance().ClearUp();
         }
     }
 }
