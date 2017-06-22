@@ -57,8 +57,13 @@ namespace GaoGao
 
         public List<ColorSet>   m_colors = new List<ColorSet>(10);
         public int              m_curColor = -1;
+        
+        public List<ColorSet>   m_inside = new List<ColorSet>(10);
+        public int              m_curInside = -1;
+
         public MeshRenderer[]   m_meshes;
         public List<Material>   m_BaseMat = new List<Material>(100);
+        public List<Material>   m_InsideMat = new List<Material>(100);
 
         public List<WheelSet>   m_WheelSets = new List<WheelSet>(10);
         public int              m_curWheel = 0;
@@ -81,7 +86,19 @@ namespace GaoGao
 
             SwitchColor( 0 );
 
-            for( int i = 0; i < item.m_WheelSets.Length; ++i )
+            for( int i = 0; i < item.m_insideSets.Length; ++i )
+            {
+                stInsideItem insideItem = TableItemManager<stInsideItem>.Instance().GetstItem(item.m_insideSets[i] );
+                if ( insideItem != null)
+                {
+                    ColorSet ins = new ColorSet( insideItem.m_texture, insideItem.m_icon, insideItem.m_R, insideItem.m_G, insideItem.m_B) ;
+                    m_inside.Add(ins);
+                }
+
+            }
+            SwitchInside(0);
+
+            for ( int i = 0; i < item.m_WheelSets.Length; ++i )
             {
                 stWheelItem wItem = TableItemManager<stWheelItem>.Instance().GetstItem(item.m_WheelSets[i]);
                 if ( wItem != null )
@@ -101,9 +118,13 @@ namespace GaoGao
                 Material[] mats = m_meshes[i].materials;
                 for (int j = 0; j < mats.Length; ++j)
                 {
-                    if ( mats[j].name == "BodyPaint (Instance)")
+                    if ( mats[j].name.Contains("BodyPaint"))
                     {
                         m_BaseMat.Add(mats[j]);
+                    }
+                    if( mats[j].name.Contains("Interior_1") )
+                    {
+                        m_InsideMat.Add(mats[j]);
                     }
                 }
             }
@@ -134,6 +155,30 @@ namespace GaoGao
             }
         }
 
+        public void SwitchNextInside()
+        {
+            int color = m_curInside + 1;
+            if (color == m_inside.Count)
+                color = 0;
+            SwitchInside(color);
+        }
+
+        public void SwitchInside( int inside )
+        {
+            if (m_curInside != inside)
+            {
+                m_curInside = inside;
+                if (m_curInside < m_inside.Count)
+                {
+                    ColorSet set = m_inside[m_curInside];
+                    Color clr = new Color(set.R / 255, set.G / 255, set.B / 255);
+                    for (int i = 0; i < m_InsideMat.Count; ++i)
+                    {
+                        m_InsideMat[i].color = clr;
+                    }
+                }
+            }
+        }
 
         public void SwitchNextWheel()
         {

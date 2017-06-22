@@ -107,4 +107,16 @@ namespace GaoGao
             m_B = fileData.getInt(readIndex); readIndex++;
         }
     }
+
+    public class stSceneItem : BaseData
+    {
+        public string m_mapName;
+  
+        public override void LoadData(int nRowIndex, TableFile fileData)
+        {
+            int readIndex = 0;
+            m_nId = fileData.getInt(readIndex); readIndex++;
+            m_mapName = fileData.getString(readIndex); readIndex++;
+        }
+    }
 }
