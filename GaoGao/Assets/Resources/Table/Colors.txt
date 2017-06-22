@@ -1,0 +1,7 @@
+INT	STRING	STRING	INT	INT	INT
+ID	Texture	Icon	R	G	B
+1			255	0	0
+2			0	255	0
+3			0	0	255
+4			0	0	0
+5			255	255	255

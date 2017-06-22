@@ -1,0 +1,5 @@
+INT	STRING
+ID	Map
+1	view_scene
+2	view_scene_red
+3	view_scene_yellow

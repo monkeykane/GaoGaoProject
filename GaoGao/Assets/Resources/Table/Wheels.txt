@@ -1,0 +1,6 @@
+INT	STRING	STRING
+ID	Prefab	Icon
+1	Wheels/WheelBackLeft	
+2	Wheels/WheelFrontLeft	
+3	Wheels/WheelFrongRight	
+4	Wheels/WheelBackRight	
